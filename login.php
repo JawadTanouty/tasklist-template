@@ -1,7 +1,24 @@
 <?php
 require_once "bdd-crud.php";
-// TODO Connection Utilisateur via la session
+session_start();
 
+$isError = false;
+if(isset($_SESSION["user_id"])){
+    header("Location: index.php");
+    exit();
+}
+if(isset($_POST["email"]) && isset($_POST["password"])){
+    if(function_exists('get_user_by_login')) {
+        $user = get_user_by_login($_POST["email"], $_POST["password"]);
+        if($user !== null) {
+            $_SESSION["user_id"] = $user["id"];
+            header("Location: index.php");
+            exit();
+        } else {
+            $isError = true;
+        }
+    }
+}
 ?>
 
 
@@ -14,8 +31,17 @@ require_once "bdd-crud.php";
 </head>
 <body>
     <h1>Connexion</h1>
-    <!-- TODO Formulaire de connexion -->
+    <form action="" method="post">
+        <input type="email" name="email" placeholder="votre email...">
+        <input type="password" name="password" placeholder="votre mot de passe...">
+        <button>Se connecter</button>
+    </form>
 
-    <a href="inscription.php">Pas de compte ? S'inscrire</a>
+    <?php if($isError): ?>
+    <p style="color:red;">Identifiants incorrects.</p>
+<?php endif; ?>
+
+        <a href="inscription.php">Pas de compte ? S'inscrire</a>
+
 </body>
 </html>

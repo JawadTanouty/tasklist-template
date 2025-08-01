@@ -1,4 +1,7 @@
 <?php
+function connect_database() {
+    return new PDO("mysql:host=127.0.0.1;dbname=app-database", "root", "root");
+}
 /**
  * Ce fichier contient les fonctions de CRUD pour les utilisateurs et les tâches.
  * Il est utilisé pour interagir avec la base de données.
@@ -9,53 +12,88 @@
  * Vous pourrez ainsi facilment les utiliser dans les autres fichiers et construire votre site sans plus vous soucis du SQL.
  */
 
-
-function connect_database() : PDO{
-    $database = new PDO("mysql:host=127.0.0.1;dbname=app-database","root","root");
-    return $database;
-}
-// CRUD User
-// Create (signin)
-function create_user(string $email,string $password) : int | null {
+function create_user(string $nom, string $email, string $password): int | null
+{
     $database = connect_database();
-    // TODO
+
+    // Hash password
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    // ajout user
+    $stmt = $database->prepare("INSERT INTO user (name, email, password) VALUES (?, ?, ?)");
+    $stmt->execute([$nom, $email, $password_hash]);
+    // Récupération du dernier id
+    $user_id = $database->lastInsertId();
 
     return $user_id;
 }
-// Read (login)
-function get_user(string $email) : array | null {
+
+function get_user(int $id): array | null
+{
     $database = connect_database();
-    // TODO 
+
+    $stmt = $database->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->execute([$id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $user;
 }
 
-
-// CRUD Task
-// Créer une tache pour l'utilisateur user_id
-function add_task(string $name,string $description,int $user_id) : int | null {
+function get_user_by_login(string $email, string $password): array | null
+{
     $database = connect_database();
 
-    
+    $stmt = $database->prepare("SELECT * FROM user WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (password_verify($password, $user["password"])) {
+        return $user;
+    } else {
+        return null;
+    }
+}
+
+// CRUD Task
+// Create
+function add_task(string $name, string $description): int | null
+{
+    $database = connect_database();
+
+    $stmt = $database->prepare("INSERT INTO task (title, description, user_id) VALUES (?, ?, ?)");
+    $stmt->execute([$name, $description, $_SESSION['user_id']]);
+    $task_id = $database->lastInsertId();
+
     return $task_id;
 }
 
 //Read
-function get_task(int $id) : array | null {
+function get_task(int $id): array | null | false
+{
     $database = connect_database();
-    // TODO
+
+    $stmt = $database->prepare("SELECT * FROM task WHERE id = ? AND user_id = ?");
+    $stmt->execute([$id, $_SESSION['user_id']]);
+    $task = $stmt->fetch(PDO::FETCH_ASSOC);
+
     return $task;
 }
-// Récupère toutes les taches QUI APPARTIENNENT à l'utilisateur user_id
-function get_all_task(int $user_id) : array | null {
+
+function get_all_task_for_user(): array | null
+{
     $database = connect_database();
-    // TODO
+
+    $stmt = $database->prepare("SELECT * FROM task WHERE user_id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     return $tasks;
 }
 
-// Delete (BONUS)
-function delete_task(int $id) : bool{
+// Delete
+function delete_task(int $id): bool
+{
     $database = connect_database();
-    // TODO
-    return $isSuccessful;
+    $stmt = $database->prepare("DELETE FROM task WHERE id = ? AND user_id = ?");
+    return $stmt->execute([$id, $_SESSION['user_id']]);
 }
+    
