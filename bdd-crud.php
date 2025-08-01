@@ -96,4 +96,8 @@ function delete_task(int $id): bool
     $stmt = $database->prepare("DELETE FROM task WHERE id = ? AND user_id = ?");
     return $stmt->execute([$id, $_SESSION['user_id']]);
 }
+
+//finally done
+
+?>
     

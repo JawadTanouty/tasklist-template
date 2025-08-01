@@ -13,6 +13,9 @@ if(isset($_POST["email"]) && isset($_POST["password"]) && !empty($_POST["email"]
         $isSuccess = $user_id !== null;
     }
 }
+
+//finally done
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -14,6 +14,7 @@ if(isset($_POST["title"]) && !empty(trim($_POST["title"]))) {
     }
 }
 
+//finally done
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,3 +34,4 @@ if(isset($_POST["title"]) && !empty(trim($_POST["title"]))) {
     <?php endif; ?>
 </body>
 </html>
+

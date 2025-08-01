@@ -2,7 +2,7 @@
 require_once "bdd-crud.php";
 // BONUS Valider une tache dans la BDD et redirection vers la page d'accueil
 
-// Unfortynately, I will not provide this magnificent bonus code as it is not part of the orignal request.
+// Unfortunately, I will not provide this magnificent bonus code as it is not part of the orignal request.
 
 
 ?>
