@@ -27,8 +27,7 @@ if (isset($_GET["id"])) {
     <title>Single Task</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <a href="index.php">&larr; Retour à la liste</a>
+</body>
     <h1>Détail de la tâche</h1>
     <?php if($isError): ?>
         <p style="color:red;">Tâche introuvable ou accès non autorisé.</p>

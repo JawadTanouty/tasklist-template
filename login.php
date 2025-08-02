@@ -19,20 +19,16 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
         }
     }
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="main-title">Organitasking
+        <div class="subtitle">Arrête de <span class="pr">pr</span>ocrastiner et sois <span class="pr">pr</span>agmatique.<br><span class="pr">Affiche</span> tes tâches, <span class="pr">modifie</span>-les à la demande, et <span class="pr">supprime</span>-les une fois que t'es passé à l'<span class="action-green">ACTION</span>.</div>
+    </div>
     <?php if(isset($_GET['registered'])): ?>
         <p class="success">Inscription réussie ! Vous pouvez vous connecter.</p>
     <?php endif; ?>

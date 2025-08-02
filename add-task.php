@@ -7,10 +7,10 @@ if(!isset($_SESSION["user_id"])){
     exit();
 }
 
-$isSuccess = false;
 if(isset($_POST["title"]) && !empty(trim($_POST["title"]))) {
+    $desc = isset($_POST["description"]) ? $_POST["description"] : "";
     if(function_exists('add_task')) {
-        $result = add_task($_POST["title"], "");
+        $result = add_task($_POST["title"], $desc);
         if ($result !== null) {
             header("Location: index.php?success=1");
             exit();
@@ -31,10 +31,11 @@ if(isset($_POST["title"]) && !empty(trim($_POST["title"]))) {
     <h1>Ajouter une tâche</h1>
     <a href="index.php" class="add-task-link">&larr; Retour à la liste des tâches</a>
     <form action="" method="POST">
-        <input type="text" name="title" placeholder="Titre de la tâche">
+        <input type="text" name="title" placeholder="Titre de la tâche" required>
+        <textarea name="description" placeholder="Description de la tâche" rows="4" class="edit-task-textarea"></textarea>
         <button>Ajouter</button>
     </form>
-    <!-- Message de succès supprimé, affiché désormais sur index.php si besoin -->
+    
 </body>
 </html>
 

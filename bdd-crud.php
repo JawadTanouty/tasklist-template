@@ -2,15 +2,6 @@
 function connect_database() {
     return new PDO("mysql:host=127.0.0.1;dbname=app-database", "root", "root");
 }
-/**
- * Ce fichier contient les fonctions de CRUD pour les utilisateurs et les tâches.
- * Il est utilisé pour interagir avec la base de données.
- * Presque toutes les pages de l'application utilisent ce fichier.
- * 
- * A vous de remplir ces fonction pour qu'elles fonctionnent correctement.
- * 
- * Vous pourrez ainsi facilment les utiliser dans les autres fichiers et construire votre site sans plus vous soucis du SQL.
- */
 
 function create_user(string $nom, string $email, string $password): int | null
 {
@@ -99,4 +90,4 @@ function delete_task(int $id): bool
 
 
 ?>
-    
+

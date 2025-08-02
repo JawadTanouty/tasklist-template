@@ -2,7 +2,7 @@
 require_once "bdd-crud.php";
 
 session_start();
-$isSuccess = false;
+
 if(isset($_SESSION["user_id"])){
     header("Location: index.php");
     exit();
@@ -16,15 +16,9 @@ if(isset($_POST["email"]) && isset($_POST["password"]) && !empty($_POST["email"]
         }
     }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,9 +27,10 @@ if(isset($_POST["email"]) && isset($_POST["password"]) && !empty($_POST["email"]
 </head>
     <form action="" method="post">
         <input type="email" name="email" placeholder="votre email...">
+</body>
         <input type="password" name="password" placeholder="votre mot de passe...">
         <button>S'inscrire</button>
     </form>
-    <!-- Message de succès supprimé, redirection vers login.php à la place -->
+</body>
 </body>
 </html>

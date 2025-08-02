@@ -1,6 +1,5 @@
 <?php
 require_once "bdd-crud.php";
-// TODO Redirection vers la page de connexion si l'utilisateur n'est pas connecté
 
 session_start();
 if(!isset($_SESSION["user_id"])){
@@ -41,18 +40,30 @@ if(function_exists('get_all_task_for_user')) {
         <?php endif; ?>
     </header>
     <h1>Liste des tâches</h1>
-    <div class="tasks"> 
-        <!-- TODO Afficher la liste des tâches de l'utilisateur connecté -->
-        <form action="add-task.php" method="get" style="margin-bottom:2em; text-align:center;">
+    <?php if(isset($_GET['success'])): ?>
+        <p class="success">Tâche ajoutée avec succès !</p>
+    <?php endif; ?>
+
+    <header class="add-task-header">
+        <form action="add-task.php" method="get" style="text-align:center;">
             <button type="submit">Ajouter une tâche</button>
         </form>
+    </header>
+
+    <div class="tasks">
+        <!-- TODO Afficher la liste des tâches de l'utilisateur connecté -->
+        <!-- Bouton déplacé dans le header, suppression ici pour éviter le doublon -->
 
     <?php foreach($tasks as $task):?>
         <div class="task">
-            <p class="task_title">
-                <?= htmlspecialchars($task["title"]) ?>
-                <a href="delete-task.php?id=<?= urlencode($task["id"]) ?>" onclick="return confirm('Voulez-vous vraiment supprimer cette tâche ?');" style="color:red; margin-left:10px;">Supprimer</a>
-            </p>
+            <div class="task_title"><?= htmlspecialchars($task["title"]) ?></div>
+            <?php if(!empty($task["description"])): ?>
+                <div class="task_description"><?= nl2br(htmlspecialchars($task["description"])) ?></div>
+            <?php endif; ?>
+            <div style="display:flex; gap:0.5em;">
+                <a href="edit-task.php?id=<?= urlencode($task["id"]) ?>" style="color:#1976d2;">Modifier</a>
+                <a href="delete-task.php?id=<?= urlencode($task["id"]) ?>" onclick="return confirm('Voulez-vous vraiment supprimer cette tâche ?');">Supprimer</a>
+            </div>
         </div>
     <?php endforeach; ?>
 
