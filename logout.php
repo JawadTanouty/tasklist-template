@@ -5,5 +5,5 @@ session_destroy(); // Vider $_SESSION
 header("Location: login.php");
 exit(); // Redirection vers la page de connexion
 
-//finally done
+
 ?>

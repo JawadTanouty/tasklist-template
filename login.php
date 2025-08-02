@@ -20,7 +20,6 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
     }
 }
 
-//finally done
 
 ?>
 
@@ -31,6 +30,7 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Connexion</h1>
@@ -44,7 +44,7 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
     <p style="color:red;">Identifiants incorrects.</p>
 <?php endif; ?>
 
-        <a href="inscription.php">Pas de compte ? S'inscrire</a>
+        <a href="inscription.php" class="signup-link">Pas de compte ? S'inscrire</a>
 
 </body>
 </html>

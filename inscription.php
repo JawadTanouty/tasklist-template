@@ -14,7 +14,6 @@ if(isset($_POST["email"]) && isset($_POST["password"]) && !empty($_POST["email"]
     }
 }
 
-//finally done
 
 ?>
 <!DOCTYPE html>
@@ -23,11 +22,12 @@ if(isset($_POST["email"]) && isset($_POST["password"]) && !empty($_POST["email"]
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-       <!-- TODO Formulaire pour s'inscrire (créer un utilisateur) -->
-
-    <h1>Inscription</h1>
     <form action="" method="post">
         <input type="email" name="email" placeholder="votre email...">
         <input type="password" name="password" placeholder="votre mot de passe...">

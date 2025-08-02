@@ -1,9 +1,23 @@
 <?php
 require_once "bdd-crud.php";
-// BONUS Afficher les détails d'une tâche spécifique en fonction de son ID passé en $_GET
+session_start();
 
-// Unfortunately, I will not provide this magnificent bonus code as it is not part of the orignal request.
-
+$task = null;
+$isError = false;
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+if (isset($_GET["id"])) {
+    if (function_exists('get_task')) {
+        $task = get_task((int)$_GET["id"]);
+        if (!$task) {
+            $isError = true;
+        }
+    }
+} else {
+    $isError = true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +25,20 @@ require_once "bdd-crud.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Single Task</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <a href="index.php">&larr; Retour à la liste</a>
+    <h1>Détail de la tâche</h1>
+    <?php if($isError): ?>
+        <p style="color:red;">Tâche introuvable ou accès non autorisé.</p>
+    <?php else: ?>
+        <ul>
+            <li><strong>Titre :</strong> <?= htmlspecialchars($task["title"]) ?></li>
+            <li><strong>Description :</strong> <?= nl2br(htmlspecialchars($task["description"])) ?></li>
+            <li><strong>Date de création :</strong> <?= htmlspecialchars($task["created_at"]) ?></li>
+            <!-- Ajoutez d'autres champs si besoin -->
+        </ul>
+    <?php endif; ?>
 </body>
 </html>

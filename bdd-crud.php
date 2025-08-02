@@ -97,7 +97,6 @@ function delete_task(int $id): bool
     return $stmt->execute([$id, $_SESSION['user_id']]);
 }
 
-//finally done
 
 ?>
     
