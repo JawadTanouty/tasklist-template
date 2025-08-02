@@ -33,6 +33,9 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php if(isset($_GET['registered'])): ?>
+        <p class="success">Inscription réussie ! Vous pouvez vous connecter.</p>
+    <?php endif; ?>
     <h1>Connexion</h1>
     <form action="" method="post">
         <input type="email" name="email" placeholder="votre email...">
