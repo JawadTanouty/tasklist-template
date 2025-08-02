@@ -26,8 +26,12 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-title">Organitasking
-        <div class="subtitle">Arrête de <span class="pr">pr</span>ocrastiner et sois <span class="pr">pr</span>agmatique.<br><span class="pr">Affiche</span> tes tâches, <span class="pr">modifie</span>-les à la demande, et <span class="pr">supprime</span>-les une fois que t'es passé à l'<span class="action-green">ACTION</span>.</div>
+    <div style="text-align:center; margin-top:2.2em; margin-bottom:0.5em;">
+        <img src="organitasking.jpg" alt="Organitasking" style="max-width: 350px; width: 100%; height: auto; display: inline-block;" />
+        <div class="subtitle">Arrête de <span class="pr">pr</span>ocrastiner et sois <span class="pr">pr</span>agmatique.<br>
+        <span style="font-weight: bold; font-size:1.08em;"><span class="pr">PR</span>OJÈTE-TOI, <span class="pr">PR</span>ÉVOIS, <span class="pr">PR</span>OGRAMME, <span class="pr">PR</span>OCÈDE !</span><br>
+        <span class="pr">Affiche</span> tes tâches, <span class="pr">modifie</span>-les à la demande, et <span class="pr">supprime</span>-les une fois que t'es passé à l'<span class="action-green">ACTION</span>.
+        </div>
     </div>
     <?php if(isset($_GET['registered'])): ?>
         <p class="success">Inscription réussie ! Vous pouvez vous connecter.</p>
